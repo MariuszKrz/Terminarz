@@ -1,21 +1,21 @@
-import  base
-import insert
+import base
+# import insert
+import select
 from datetime import date
-from  flask import Flask, render_template
-import sqlalchemy
-from sqlalchemy import *
-from sqlalchemy.ext.declarative import declarative_base
+from flask import Flask, render_template
 from sqlalchemy.orm import sessionmaker
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def hello():
-   return render_template('organizer.html')
+    Session = sessionmaker(bind=base.engine)
+    session = Session()
 
-# @app.route('/organizer')
-# def organizer():
-#    return render_template('organizer.html')
+    records = session.query(base.Terminarz).all()
+
+    return render_template('organizer.html', d = records)
 
 if __name__ == '__main__':
-   app.run(debug=True)
+    app.run(debug=True)

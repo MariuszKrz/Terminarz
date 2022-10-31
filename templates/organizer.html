@@ -29,17 +29,21 @@
 			<th width="230px">Nazwa zadania</th><th>Termin</th><th>Przypomnienie</th><th width="430 px">Opis</th><th  colspan="2">Akcja</th>
 		</tr>
 <!-- ----------------------------	POBRANIE REKORDÓW ------------------------	-->	
-
+<!--		<tr>-->
+<!--			<td><h1>{{ d }}</h1></td>-->
+<!--		</tr>-->
+		{% for dane in d %}
 			<tr>
-				<td>".$wiersz['nazwaZadania']."</td>
-				<td class='data'>".$wiersz['termin']."</td>
-				<td class='data'>".$wiersz['przypomnienie']."</td>
-				<td>".$wiersz['opis']."</td>
+				<td>{{ dane.id }}</td>
+				<td class='data'>{{ dane.name }}</td>
+				<td class='data'>{{ dane.date }}</td>
+				<td>{{ dane.description }}</td>
 
 					<td><a href='zmiana.php?zmiana=".$wiersz['Lp_cal']."'><i class='icon-pencil'></i></a></td>
 					<td><a href='organizer.php?delete=".$wiersz['Lp_cal']."'><i class='icon-trash-empty'></i></a></td>
 
 			</tr>
+		{% endfor %}
 		</table>
 	</div>
 	<div class="stopka">copyright &copy Mariusz Krzystoszek A.D. 2018

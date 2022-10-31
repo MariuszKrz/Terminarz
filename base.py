@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 
-engine = create_engine('sqlite:///zadania1.db', echo=False)
+engine = create_engine('sqlite:///zadania2.db', echo=False)
 base = declarative_base()
 
 class Terminarz(base):
