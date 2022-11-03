@@ -12,12 +12,14 @@
 	</div>
 <!-- ----------------------------	FORMULARZ DODAWANIA REKORDÓW ------------------------------>
 	<div class="form">
-			<form method="post" action="zadanieAdd.php">
-				Nazwa zadania:   <input type="text" name="nazwaZadania" placeholder="Nazwa zadania" onfocus="this.placeholder=''" onblur="this.placeholder='Nazwa zadania'"><br/><br/>
-				Termin:   <input type="date" name="termin" value="Data"/><br/><br/>
-				Krótki opis:   <input type="text" class="opis" name="opis" placeholder="Opis" onfocus="this.placeholder=''" onblur="this.placeholder='Opis'"><br/>
+		<form method="POST" action="{{ url_for('dodaj') }}">
+				{{ form.csrf_token }}
+				{{ form.task_name.label }}	{{ form.task_name }} </br>
+				{{ form.date.label }}	{{ form.date }} </br>
+				{{ form.description.label }}	{{ form.description }} </br>
+
 				</br><input type="submit" value="dodaj"/>
-			</form>			
+			</form>
 	</div>
 	<div class="zerowanie"></div>
 	</div>
@@ -26,26 +28,21 @@
 <!-- ---------------------------- TABELA REKORDÓW ------------------------------>
 	<table id="tabela">
 		<tr>
-			<th width="230px">Nazwa zadania</th><th>Termin</th><th>Przypomnienie</th><th width="430 px">Opis</th><th  colspan="2">Akcja</th>
+			<th width="230px">Lp</th><th>Nazwa zadania</th><th>Termin</th><th width="430 px">Opis</th><th  colspan="2">Akcja</th>
 		</tr>
 <!-- ----------------------------	POBRANIE REKORDÓW ------------------------	-->	
-<!--		<tr>-->
-<!--			<td><h1>{{ d }}</h1></td>-->
-<!--		</tr>-->
-		{% for dane in d %}
+
+		{% for dane in records %}
 			<tr>
 				<td>{{ dane.id }}</td>
 				<td class='data'>{{ dane.name }}</td>
 				<td class='data'>{{ dane.date }}</td>
 				<td>{{ dane.description }}</td>
 
-					<td><a href='zmiana.php?zmiana=".$wiersz['Lp_cal']."'><i class='icon-pencil'></i></a></td>
-					<td><a href='organizer.php?delete=".$wiersz['Lp_cal']."'><i class='icon-trash-empty'></i></a></td>
-
 			</tr>
 		{% endfor %}
 		</table>
 	</div>
-	<div class="stopka">copyright &copy Mariusz Krzystoszek A.D. 2018
+	<div class="stopka">copyright &copy Mariusz Krzystoszek A.D. 2018</div>
 </div>
 {% endblock %}
