@@ -1,9 +1,7 @@
 import base
 from form import *
-#import insert
-#import select
 from datetime import date
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, redirect
 from sqlalchemy.orm import sessionmaker
 
 app = Flask(__name__)
@@ -25,12 +23,13 @@ def dodaj():
     Session = sessionmaker(bind=base.engine)
     session = Session()
     session.add(base.Terminarz(form.task_name.data, form.date.data, form.description.data))
-
+    session.commit()
     records = session.query(base.Terminarz).all()
 
 
     if form.validate_on_submit():
-        render_template("organizer.html", form=form, records=records)
+        return redirect(url_for("hello"))
+
     return render_template('organizer.html', form=form, records = records)
 
 if __name__ == '__main__':
